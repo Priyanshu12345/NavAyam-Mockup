@@ -1,0 +1,6 @@
+{
+  "name": "NavAyam",
+  "description": "Curated residential plots, land, and property showroom with transparent guidance and personal assistance.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
