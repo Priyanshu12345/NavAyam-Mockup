@@ -17,7 +17,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, onSelect }
     <div
       id={`property-card-${property.id}`}
       onClick={() => onSelect(property)}
-      className="group bg-[#FFFFFF] rounded-xl overflow-hidden border border-[#E5DFD5] hover:border-[#1E3A2F]/40 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1"
+      className="card-lift group bg-[#FFFFFF] rounded-xl overflow-hidden border border-[#E5DFD5] hover:border-[#1E3A2F]/40 shadow-xs flex flex-col cursor-pointer"
     >
       {/* Property Image Container */}
       <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#ECE7DE]">

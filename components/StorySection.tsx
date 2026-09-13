@@ -2,19 +2,25 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { ArrowRight, Compass, CheckCircle2, Trees } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Trees } from 'lucide-react';
+import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 
 interface StorySectionProps {
   onExploreProjects: () => void;
 }
 
 export const StorySection: React.FC<StorySectionProps> = ({ onExploreProjects }) => {
+  const { ref: imgRef, isInView: imgInView } = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
+  const { ref: contentRef, isInView: contentInView } = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
   return (
     <section id="story" className="py-20 sm:py-32 bg-[#FAF8F5] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Architectural Imagery Showcase Side */}
-          <div className="lg:col-span-6 relative">
+          <div
+            ref={imgRef}
+            className={`reveal reveal-left ${imgInView ? 'in-view' : ''} lg:col-span-6 relative`}
+          >
             <div className="relative aspect-[4/5] sm:aspect-[1/1] lg:aspect-[4/5] w-full rounded-2xl overflow-hidden shadow-xl border border-[#E5DFD5]">
               <Image
                 src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1600&q=85"
@@ -27,18 +33,7 @@ export const StorySection: React.FC<StorySectionProps> = ({ onExploreProjects })
               <div className="absolute inset-0 bg-gradient-to-t from-[#142820]/60 via-transparent to-transparent" />
 
               {/* Floating Architectural Badge */}
-              <div className="absolute bottom-6 left-6 right-6 p-5 rounded-xl bg-[#FAF8F5]/95 backdrop-blur-md border border-[#E5DFD5] shadow-lg">
-                <div className="flex items-center justify-between text-xs font-sans text-[#181B19]">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#1E3A2F]" />
-                    <span className="font-semibold tracking-wide">Pristine Plotted Enclaves</span>
-                  </div>
-                  <span className="text-[#6B726F]">Indore & Central MP</span>
-                </div>
-                <p className="mt-2 text-xs text-[#575F5B] font-sans leading-relaxed">
-                  Every parcel is assessed for topography, solar orientation, groundwater depth, and statutory road setbacks before being showcased.
-                </p>
-              </div>
+
             </div>
 
             {/* Subtle decorative geometry */}
@@ -46,7 +41,10 @@ export const StorySection: React.FC<StorySectionProps> = ({ onExploreProjects })
           </div>
 
           {/* Editorial Content Side */}
-          <div className="lg:col-span-6 flex flex-col justify-center">
+          <div
+            ref={contentRef}
+            className={`reveal reveal-right ${contentInView ? 'in-view' : ''} lg:col-span-6 flex flex-col justify-center`}
+          >
             <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-sans font-medium text-[#4B6B58] mb-4">
               <Trees className="w-4 h-4 text-[#1E3A2F]" />
               <span>Our Philosophy</span>
@@ -62,13 +60,13 @@ export const StorySection: React.FC<StorySectionProps> = ({ onExploreProjects })
 
             <div className="mt-6 sm:mt-8 space-y-4 text-base text-[#575F5B] font-sans leading-relaxed">
               <p>
-                Land is not merely square footage; it is the foundation where your family’s next decades unfold. Yet, traditional real estate has made acquiring land exhausting—filled with obscure legal jargon, pushy sales calls, and uncertain titles.
+                Land is not merely square footage; it is where your family’s future takes root. In a region as naturally gifted as Dehradun, choosing the right parcel means balancing peaceful foothill surroundings, lush greenery, and clean air with practical everyday accessibility to schools, healthcare, and the city centre.
               </p>
               <p>
-                At NavAyam, we intentionally limit our portfolio. Rather than listing hundreds of unverified plots, we hand-select a few exceptional residential locations across Madhya Pradesh where infrastructure is real, legal titles are spotless, and the surroundings foster quiet living.
+                At NavAyam, we choose not to overwhelm you with thousands of indiscriminate listings. Instead, we focus on a curated selection of residential opportunities across Dehradun and its prime corridors—ensuring clear demarcations, well-connected access roads, and communities that offer a genuinely balanced lifestyle.
               </p>
               <p>
-                We walk every plot with you, answer every uncomfortable legal query with verifiable paperwork, and ensure you invest with absolute confidence.
+                We guide you through each location personally, providing transparent information and honest local insights so you can discover a property that truly fits your needs.
               </p>
             </div>
 

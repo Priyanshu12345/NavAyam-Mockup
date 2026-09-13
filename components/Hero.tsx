@@ -41,15 +41,6 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick, onTalkClick }) => {
       {/* Hero Content Box */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         {/* Subtle Trust Pill */}
-        <div
-          id="hero-trust-badge"
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF8F5]/12 backdrop-blur-md border border-[#FAF8F5]/20 text-[#FAF8F5] text-xs font-sans tracking-wider uppercase mb-6 sm:mb-8"
-        >
-          <ShieldCheck className="w-3.5 h-3.5 text-[#A3C4B0]" />
-          <span>Carefully Vetted Land & Residential Plots</span>
-          <span className="w-1 h-1 rounded-full bg-[#A3C4B0]" />
-          <span className="text-[#ECE7DE]/90">Madhya Pradesh</span>
-        </div>
 
         {/* Core Headline */}
         <h1
@@ -89,18 +80,6 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick, onTalkClick }) => {
           </button>
         </div>
 
-        {/* Featured Corridor Micro-Pill */}
-        <div className="mt-10 flex items-center justify-center gap-4 text-xs text-[#C5CFC8] font-sans">
-          <span className="flex items-center gap-1">
-            <MapPin className="w-3 h-3 text-[#A3C4B0]" /> Indore
-          </span>
-          <span className="w-1 h-1 rounded-full bg-[#6B7E73]" />
-          <span>Bhopal</span>
-          <span className="w-1 h-1 rounded-full bg-[#6B7E73]" />
-          <span>Ujjain</span>
-          <span className="w-1 h-1 rounded-full bg-[#6B7E73]" />
-          <span>Dewas</span>
-        </div>
       </div>
 
       {/* Subtle Scroll Indicator */}

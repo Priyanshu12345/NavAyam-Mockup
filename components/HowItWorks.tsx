@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Search, Send, UserCheck, ArrowRight } from 'lucide-react';
+import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 
 interface HowItWorksProps {
   onStartExplore: () => void;
@@ -12,15 +13,17 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({
   onStartExplore,
   onStartEnquiry,
 }) => {
+  const { ref: headerRef, isInView: headerInView } = useScrollAnimation<HTMLDivElement>();
+  const { ref: stepsRef, isInView: stepsInView } = useScrollAnimation<HTMLDivElement>({ threshold: 0.08 });
   const steps = [
     {
       step: '01',
       action: 'Explore',
       title: 'Browse Curated Properties',
       description:
-        'Browse properties selected by NavAyam. Review verified legal approvals, plot dimensions, facing, and realistic neighborhood amenities without high-pressure marketing.',
+        'Browse carefully selected properties from NavAyam with clear details on layout, location and surroundings.',
       icon: Search,
-      ctaLabel: 'Browse Catalogue',
+      ctaLabel: 'Browse Properties',
       onCta: onStartExplore,
     },
     {
@@ -28,7 +31,7 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({
       action: 'Enquire',
       title: 'Share Your Requirements',
       description:
-        'Tell us what you’re looking for and the property you’re interested in. Share your preferred timing, budget flexibility, or specific layout preference easily.',
+        'Tell us about the property you’re interested in and what you’re looking for in Dehradun.',
       icon: Send,
       ctaLabel: 'Submit Requirement',
       onCta: onStartEnquiry,
@@ -36,11 +39,11 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({
     {
       step: '03',
       action: 'Connect',
-      title: 'Guided Advisory & Visit',
+      title: 'Personal Advisory & Tour',
       description:
-        'Our team contacts you to understand your requirements and guide you further. We schedule a personalized site tour and assist with complete registry documentation.',
+        'Our team contacts you to understand your requirements and guide you further with personalized site visits.',
       icon: UserCheck,
-      ctaLabel: 'Speak With Advisor',
+      ctaLabel: 'Connect With Team',
       onCta: onStartEnquiry,
     },
   ];
@@ -49,7 +52,10 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({
     <section id="how-it-works" className="py-20 sm:py-28 bg-[#F5F2EC] border-b border-[#E7E0D6]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20">
+        <div
+          ref={headerRef}
+          className={`reveal ${headerInView ? 'in-view' : ''} text-center max-w-2xl mx-auto mb-16 sm:mb-20`}
+        >
           <div className="inline-block text-xs uppercase tracking-[0.2em] font-sans font-medium text-[#4B6B58] mb-3">
             Simplicity & Transparency
           </div>
@@ -65,7 +71,10 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({
         </div>
 
         {/* Steps: Horizontal on Desktop, Vertical on Mobile */}
-        <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div
+          ref={stepsRef}
+          className="relative grid grid-cols-1 md:grid-cols-3 gap-8"
+        >
           {/* Subtle linking horizontal line on desktop */}
           <div className="hidden md:block absolute top-1/4 left-1/6 right-1/6 h-[1px] bg-[#D7CFC2] -z-0" />
 
@@ -75,7 +84,7 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({
               <div
                 key={item.step}
                 id={`how-it-works-step-${item.step}`}
-                className="relative z-10 bg-[#FAF8F5] rounded-xl p-8 border border-[#E5DFD5] shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                className={`reveal reveal-scale reveal-delay-${index + 1} ${stepsInView ? 'in-view' : ''} card-lift relative z-10 bg-[#FAF8F5] rounded-xl p-8 border border-[#E5DFD5] shadow-xs flex flex-col justify-between`}
               >
                 <div>
                   {/* Step pill and Icon */}

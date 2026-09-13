@@ -37,7 +37,7 @@ export const WhatsAppFloatingButton: React.FC = () => {
           {/* Body message preview */}
           <div className="p-4 bg-[#FAF8F5] text-xs text-[#252A27] font-sans space-y-2">
             <div className="bg-white p-3 rounded-xl rounded-tl-none border border-[#ECE7DE] shadow-2xs">
-              Namaste! Looking for verified residential plots or land in Indore, Bhopal, Ujjain, or Dewas? How can we assist you today?
+              Namaste! Looking for residential plots or land in Dehradun and surrounding areas? How can we assist you today?
             </div>
           </div>
 

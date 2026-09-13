@@ -150,7 +150,7 @@ export const PropertiesView: React.FC<PropertiesViewProps> = ({
                 type="text"
                 value={filters.searchQuery}
                 onChange={(e) => setFilters({ ...filters, searchQuery: e.target.value })}
-                placeholder="Search by project name or locality (e.g. Super Corridor)..."
+                placeholder="Search by project name or locality (e.g. Rajpur Road)..."
                 className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-[#FAF8F5] border border-[#E5DFD5] text-sm text-[#181B19] placeholder:text-[#89938E] focus:outline-none focus:border-[#1E3A2F]"
               />
             </div>
@@ -185,10 +185,10 @@ export const PropertiesView: React.FC<PropertiesViewProps> = ({
                 onChange={(e) => setFilters({ ...filters, location: e.target.value })}
                 className="w-full px-3 py-2 rounded-lg bg-[#FAF8F5] border border-[#E5DFD5] text-xs sm:text-sm text-[#181B19] focus:outline-none focus:border-[#1E3A2F] cursor-pointer"
               >
-                <option value="all">All Cities</option>
+                <option value="all">All Locations</option>
                 {locations.filter((l) => l !== 'all').map((loc) => (
                   <option key={loc} value={loc}>
-                    {loc}, MP
+                    {loc}, Uttarakhand
                   </option>
                 ))}
               </select>

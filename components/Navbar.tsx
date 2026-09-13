@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Menu, X, ArrowUpRight, Phone, MessageSquare } from 'lucide-react';
 
 interface NavbarProps {
@@ -16,14 +16,32 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  const handleScroll = useCallback(() => {
+    const scrollY = window.scrollY;
+    setIsScrolled(scrollY > 20);
+    // Scroll progress: percentage of page scrolled
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? Math.min((scrollY / docHeight) * 100, 100) : 0;
+    setScrollProgress(progress);
+  }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [handleScroll]);
+
+  const [activeLink, setActiveLink] = useState<string>('Home');
+
+  // Sync activeLink with currentView when switching between properties, detail, or home
+  useEffect(() => {
+    if (currentView === 'properties') {
+      setActiveLink('Properties');
+    } else if (currentView === 'detail') {
+      setActiveLink('');
+    }
+  }, [currentView]);
 
   const navLinks = [
     { label: 'Home', action: () => onNavigate('home', 'hero') },
@@ -34,7 +52,8 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: 'Contact', action: () => onNavigate('home', 'contact') },
   ];
 
-  const handleLinkClick = (action: () => void) => {
+  const handleLinkClick = (action: () => void, label: string) => {
+    setActiveLink(label);
     action();
     setMobileMenuOpen(false);
   };
@@ -42,18 +61,27 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header
       id="main-navbar"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
         isScrolled
           ? 'bg-[#FAF8F5]/95 backdrop-blur-md shadow-xs border-b border-[#EAE4DC] py-3.5'
           : 'bg-[#FAF8F5]/80 backdrop-blur-xs py-5 border-b border-transparent'
       }`}
     >
+      {/* Scroll Progress Bar */}
+      <div
+        aria-hidden="true"
+        className="absolute top-0 left-0 h-[2px] bg-gradient-to-r from-[#1E3A2F] via-[#4B6B58] to-[#A3C4B0] transition-none pointer-events-none"
+        style={{ width: `${scrollProgress}%` }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Brand Wordmark */}
           <button
             id="nav-brand-logo"
-            onClick={() => onNavigate('home')}
+            onClick={() => {
+              setActiveLink('Home');
+              onNavigate('home');
+            }}
             className="flex items-center gap-2.5 group text-left cursor-pointer focus:outline-none"
           >
             <div className="w-8 h-8 rounded-sm bg-[#1E3A2F] flex items-center justify-center text-[#FAF8F5] transition-transform duration-300 group-hover:scale-105">
@@ -71,25 +99,36 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Desktop Navigation Links */}
           <nav id="desktop-nav-links" className="hidden md:flex items-center gap-8">
-            {navLinks.map((item) => (
-              <button
-                key={item.label}
-                id={`nav-link-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
-                onClick={item.action}
-                className={`text-sm font-sans tracking-wide transition-colors duration-200 cursor-pointer py-1 relative ${
-                  (item.label === 'Home' && currentView === 'home') ||
-                  (item.label === 'Properties' && currentView === 'properties')
-                    ? 'text-[#1E3A2F] font-semibold'
-                    : 'text-[#4B534E] hover:text-[#181B19]'
-                }`}
-              >
-                {item.label}
-                {((item.label === 'Home' && currentView === 'home') ||
-                  (item.label === 'Properties' && currentView === 'properties')) && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#1E3A2F] rounded-full" />
-                )}
-              </button>
-            ))}
+            {navLinks.map((item) => {
+              const isActive =
+                activeLink === item.label &&
+                (item.label === 'Properties' ? currentView === 'properties' : currentView === 'home');
+
+              return (
+                <button
+                  key={item.label}
+                  id={`nav-link-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
+                  onClick={() => {
+                    setActiveLink(item.label);
+                    item.action();
+                  }}
+                  className={`text-sm font-sans tracking-wide transition-colors duration-200 cursor-pointer py-1 relative group/navlink ${
+                    isActive
+                      ? 'text-[#1E3A2F] font-semibold'
+                      : 'text-[#4B534E] hover:text-[#181B19]'
+                  }`}
+                >
+                  {item.label}
+                  {/* Active underline */}
+                  {isActive ? (
+                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#1E3A2F] rounded-full" />
+                  ) : (
+                    /* Hover underline slide-in */
+                    <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#1E3A2F]/40 rounded-full scale-x-0 group-hover/navlink:scale-x-100 origin-left transition-transform duration-300 ease-out" />
+                  )}
+                </button>
+              );
+            })}
           </nav>
 
           {/* Desktop Action Buttons */}
@@ -144,7 +183,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {navLinks.map((item) => (
               <button
                 key={item.label}
-                onClick={() => handleLinkClick(item.action)}
+                onClick={() => handleLinkClick(item.action, item.label)}
                 className="text-left text-lg font-serif tracking-wide py-2 text-[#181B19] border-b border-[#ECE7DE] hover:text-[#1E3A2F] flex items-center justify-between"
               >
                 <span>{item.label}</span>

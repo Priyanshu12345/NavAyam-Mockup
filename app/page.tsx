@@ -20,7 +20,7 @@ import { WhatsAppFloatingButton } from '@/components/WhatsAppFloatingButton';
 
 export default function HomePage() {
   const [currentView, setCurrentView] = useState<'home' | 'properties' | 'detail'>('home');
-  const [selectedProperty, setSelectedProperty] = useState<Property>(MOCK_PROPERTIES[0]); // Defaults to Greenwood Enclave
+  const [selectedProperty, setSelectedProperty] = useState<Property>(MOCK_PROPERTIES[0]); // Defaults to Rajpur Greens
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
   const [enquiryContextTitle, setEnquiryContextTitle] = useState<string | undefined>();
 

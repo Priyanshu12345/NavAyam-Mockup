@@ -25,13 +25,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenEnquiry }) => 
             </div>
 
             <p className="text-sm text-[#A8B2AC] font-sans leading-relaxed max-w-sm mb-6">
-              NavAyam is a premium property company helping customers discover carefully selected residential plots, land, and properties at reasonable and transparent prices across Madhya Pradesh.
+              NavAyam is a premium property company helping customers discover carefully selected residential plots, land, and properties at reasonable and transparent prices in Dehradun and surrounding areas.
             </p>
-
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-[#252A27] border border-[#373F3B] text-xs font-sans text-[#D8DFDA]">
-              <span className="w-2 h-2 rounded-full bg-[#4B6B58]" />
-              <span>Independent Property Advisory • MP RERA Compliant</span>
-            </div>
           </div>
 
           {/* Navigation Links */}
@@ -101,14 +96,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenEnquiry }) => 
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-[#A3C4B0] shrink-0 mt-1" />
                 <span>
-                  NavAyam Property Showroom, Suite 402, Brilliant Titanium, Scheme No. 78, Vijay Nagar, Indore, Madhya Pradesh 452010
+                  Dehradun, Uttarakhand — Address to be updated
                 </span>
               </div>
 
               <div className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-[#A3C4B0] shrink-0" />
                 <a href="tel:+919826012480" className="hover:text-white transition-colors">
-                  +91 98260 12480 / +91 731 409 2310
+                  +91 98260 12480 / +91 135 270 0124
                 </a>
               </div>
 
@@ -134,7 +129,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenEnquiry }) => 
 
             <div className="mt-6 pt-6 border-t border-[#2A302D] flex items-center gap-3">
               <span className="text-xs text-[#8E9B93]">Primary Focus:</span>
-              <span className="text-xs text-[#FAF8F5] font-medium">Indore • Bhopal • Ujjain • Dewas</span>
+              <span className="text-xs text-[#FAF8F5] font-medium">Dehradun & Surrounding Areas</span>
             </div>
           </div>
         </div>
@@ -148,7 +143,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenEnquiry }) => 
           <div className="flex items-center gap-6">
             <span className="hover:text-[#FAF8F5] cursor-pointer">Privacy Policy</span>
             <span className="hover:text-[#FAF8F5] cursor-pointer">Terms & Conditions</span>
-            <span className="hover:text-[#FAF8F5] cursor-pointer">RERA Disclosures</span>
           </div>
         </div>
       </div>

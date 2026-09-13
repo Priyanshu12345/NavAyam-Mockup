@@ -403,7 +403,7 @@ export const PropertyDetailView: React.FC<PropertyDetailViewProps> = ({
 
                   {/* Satellite/Standard tag */}
                   <span className="absolute bottom-3 left-3 bg-white/80 backdrop-blur-xs text-[10px] font-sans px-2.5 py-1 rounded text-[#575F5B]">
-                    Super Corridor Arterial Sector • Indore
+                    {property.location} • {property.city}
                   </span>
                 </div>
 

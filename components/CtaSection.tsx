@@ -3,12 +3,14 @@
 import React from 'react';
 import Image from 'next/image';
 import { ArrowRight, MessageSquare, PhoneCall, ShieldCheck, Clock } from 'lucide-react';
+import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 
 interface CtaSectionProps {
   onInterestedClick: () => void;
 }
 
 export const CtaSection: React.FC<CtaSectionProps> = ({ onInterestedClick }) => {
+  const { ref: contentRef, isInView: contentInView } = useScrollAnimation<HTMLDivElement>({ threshold: 0.15 });
   return (
     <section
       id="cta-enquiry-strip"
@@ -30,12 +32,12 @@ export const CtaSection: React.FC<CtaSectionProps> = ({ onInterestedClick }) => 
       {/* Decorative architectural grid lines */}
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(#FAF8F5_1px,transparent_1px)] [background-size:24px_24px] opacity-5" />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+      <div
+        ref={contentRef}
+        className={`reveal ${contentInView ? 'in-view' : ''} relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center`}
+      >
         {/* Subtle Pill */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF8F5]/10 border border-[#FAF8F5]/20 text-xs font-sans tracking-widest uppercase text-[#A3C4B0] mb-6">
-          <Clock className="w-3.5 h-3.5" />
-          <span>Prompt 2-Hour Response Guaranteed</span>
-        </div>
+
 
         {/* Heading */}
         <h2

@@ -19,11 +19,11 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
     phone: '',
     email: '',
     budget: '₹40L – ₹60L',
-    city: 'Indore',
+    city: 'Dehradun',
     preferredTime: 'Morning (9 AM - 12 PM)',
     message: propertyTitle
-      ? `Hello, I'd like more verified details about ${propertyTitle}.`
-      : 'Hello, I am looking for a verified residential plot in Madhya Pradesh.',
+      ? `Hello, I'd like more details about ${propertyTitle}.`
+      : 'Hello, I am looking for a residential plot in Dehradun / Uttarakhand.',
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -129,18 +129,20 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
 
                 <div>
                   <label className="block text-xs font-sans font-medium text-[#4B534E] mb-1">
-                    Preferred City
+                    Preferred Location
                   </label>
                   <select
                     value={form.city}
                     onChange={(e) => setForm({ ...form, city: e.target.value })}
                     className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#E5DFD5] text-xs sm:text-sm text-[#181B19] focus:outline-none focus:border-[#1E3A2F] cursor-pointer"
                   >
-                    <option>Indore, MP</option>
-                    <option>Bhopal, MP</option>
-                    <option>Ujjain, MP</option>
-                    <option>Dewas, MP</option>
-                    <option>Other Central MP</option>
+                    <option>Dehradun (Rajpur Road)</option>
+                    <option>Dehradun (Sahastradhara)</option>
+                    <option>Dehradun (Shimla Bypass)</option>
+                    <option>Dehradun (Sahaspur / West Doon)</option>
+                    <option>Mussoorie Foothills</option>
+                    <option>Haridwar / Rishikesh Road</option>
+                    <option>Other Dehradun Areas</option>
                   </select>
                 </div>
               </div>
